@@ -1,0 +1,455 @@
+/* ==========================================================================
+   Collaboration Bundle Component Styles
+   ========================================================================== */
+
+  .gi-start-collaboration-bundle {
+    position: fixed;
+    width: 174px;
+    height: 54px;
+    right: -65px;
+    top: 25%;
+    padding: 14px 17px 20px;
+    font-family: sans-serif;
+    font-size: 17px;
+    font-weight: 600;
+    background-color: #4abe0f;
+    color: white;
+    text-shadow: 0 1px 1px #42AF0A;
+    border-radius: 5px 5px 0 0;
+    box-shadow: -1px 0px 3px rgba(0,0,0,.25);
+    cursor: pointer;
+    -webkit-font-smoothing: antialiased;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+
+    /* IE8/9 Button Image */
+    width: 54px\9;
+    height: 170px\9;
+    right: -5px\9;
+    border-radius: 0\9;
+    box-shadow: none\9;
+    text-indent: -9999px\9;
+    background-color: transparent\9;
+    background-image: url('../images/button-fallback.png');
+
+    /* Gradient */
+    background-image: -moz-linear-gradient(top,  rgba(255,255,255,0.25) 0%, rgba(255,255,255,0) 100%);
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,0.25)), color-stop(100%,rgba(255,255,255,0)));
+    background-image: -webkit-linear-gradient(top,  rgba(255,255,255,0.25) 0%,rgba(255,255,255,0) 100%);
+    background-image: -o-linear-gradient(top,  rgba(255,255,255,0.25) 0%,rgba(255,255,255,0) 100%);
+    background-image: linear-gradient(to bottom,  rgba(255,255,255,0.25) 0%,rgba(255,255,255,0) 100%);
+
+    /* Transition */
+    -webkit-transition: all .15s ease-in-out;
+       -moz-transition: all .15s ease-in-out;
+        -ms-transition: all .15s ease-in-out;
+         -o-transition: all .15s ease-in-out;
+            transition: all .15s ease-in-out;
+
+    /* Rotate */
+    -webkit-transform: rotate(-90deg);
+       -moz-transform: rotate(-90deg);
+         -o-transform: rotate(-90deg);
+  }
+
+    .gi-start-collaboration-bundle:hover {
+      right: -2px\9;
+      background-color: #54D314;
+      background-color: transparent\9;
+      text-shadow: 0 1px 1px rgba(66, 175, 10, 0);
+    }
+
+    .gi-start-collaboration-bundle:active {
+      background-color: #4abe0f;
+      background-color: transparent\9;
+    }
+
+/*
+   Userlist Wrapper
+   ========================================================================== */
+
+.gi-userlist-wrapper {
+  position: fixed;
+  right: 0;
+  top: 25%;
+  max-width: 175px;
+  box-shadow: 0 1px 5px rgba(0,0,0,.2);
+  font-family: sans-serif;
+  z-index: 9999;
+  border-radius: 3px;
+}
+
+  .gi-userlist-wrapper .gi-icon {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    background-image: url('../images/sprite.png');
+    background-repeat: no-repeat;
+  }
+
+  /* Collapsed State */
+  .gi-userlist-wrapper.gi-collapsed .gi-userlist.gi-override .gi-options,
+  .gi-userlist-wrapper.gi-collapsed .gi-userlist.gi-override .gi-name {
+    display: none;
+  }
+
+/*
+   Userlist Overrides
+   ========================================================================== */
+
+.gi-userlist.gi-override {
+  box-shadow: none;
+  border-radius: 0;
+}
+
+  .gi-userlist.gi-override .gi-inner {
+    border-right: 0;
+    border-bottom: 0;
+    border-radius: 3px 0 0 0;
+  }
+
+    .gi-userlist.gi-override .gi-inner li:only-child {
+      border-bottom: 1px solid #ccc;
+    }
+
+  .gi-userlist.gi-override .gi-options input {
+    width: 103px;
+  }
+
+/*
+   Utilities Panel
+   ========================================================================== */
+
+.gi-utilities {
+  position: relative;
+  height: auto;
+  padding: 3px 7px 0;
+  border-radius: 0 0 0 3px;
+  border: 1px solid #ccc;
+  border-top: 0;
+  border-right: 0;
+  background: #f7f7f7;
+  z-index: 1;
+}
+
+  .gi-utilities * {
+    line-height: normal;
+  }
+
+  .gi-utilities > div {
+    position: relative;
+    padding: 7px 0;
+    border-top: 1px solid #ddd;
+    background: #f7f7f7;
+
+  }
+
+    .gi-utilities > div a {
+      display: block;
+      position: relative;
+      padding: 5px 4px 4px 5px;
+      font-weight: bold;
+      font-size: 12px;
+      text-decoration: none;
+      border: 1px solid #f7f7f7;
+      border-radius: 3px;
+      color: #444;
+    }
+
+      .gi-utilities > div a .gi-icon {
+        display: block;
+        float: left;
+        margin: -2px 5px 0 0;
+      }
+
+        .gi-utilities > div a:hover {
+          color: #111;
+          border: 1px solid #ddd;
+          background-color: #eee;
+        }
+
+        .gi-utilities > div a:active {
+          background-color: #ddd;
+        }
+
+  /* Utilties Icons */
+  .gi-invite .gi-icon {
+    background-position: -32px -6px;
+  }
+
+  .gi-leave .gi-icon {
+    background-position: -109px -5px;
+  }
+
+  .gi-userlist-wrapper.gi-collapsed .gi-utilities-text {
+    display: none;
+  }
+
+  .gi-userlist-wrapper.gi-collapsed .gi-icon {
+    margin-right: 0;
+    float: none;
+  }
+
+  /* Utilities Popouts */
+  .gi-popout {
+    display: none;
+    position: absolute;
+    width: 200px;
+    left: -235px;
+    padding: 10px;
+    border-radius: 3px;
+    border: 1px solid #333;
+    background: url('../images/transparent.png');
+    background: rgba(0,0,0,.7);
+    box-shadow: 0 1px 5px rgba(0,0,0,.3);
+    font-size: 12px;
+    color: #eee;
+  }
+
+  .gi-userlist-wrapper.gi-inviting .gi-popout {
+    display: block;
+  }
+
+    /* Pseudo Arrow */
+    .gi-popout:before {
+      content: "";
+      right: -9px;
+      position: absolute;
+      border-top: 8px solid transparent;
+      border-bottom: 8px solid transparent;
+      border-left: 8px solid #333;
+    }
+
+  .gi-invite-popout {
+    bottom: 0;
+  }
+
+    .gi-invite-popout:before {
+      top: 28px;
+    }
+
+    .gi-popout input[type="text"] {
+      height: auto;
+      width: 100%;
+      margin: 0;
+      padding: 5px 6px;
+      border: 0;
+      border-radius: 3px;
+      font-family: sans-serif;
+      font-size: 13px;
+      background: #eee;
+      color: #999;
+      box-sizing: border-box;
+      -moz-box-sizing: border-box;
+    }
+
+      .gi-popout input[type="text"]:focus {
+        outline: 0;
+        background: #fff;
+        color: #222;
+      }
+
+    .gi-popout p {
+      font-weight: 400;
+      margin: 0 0 7px;
+    }
+
+/*
+   Modals
+   ========================================================================== */
+
+ /* Changing the Box Model */
+ .gi-modal-container * {
+   box-sizing: border-box;
+   -moz-box-sizing: border-box;
+ }
+
+/* Positioning Container */
+.gi-modal-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  z-index: 9999;
+}
+
+  .gi-modal-container:before {
+    content: "";
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+    margin-right: -0.25em;
+  }
+
+  /* Transparent Overlay */
+  .gi-modal-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('../images/transparent.png');
+    background: rgba(0,0,0,.7);
+    z-index: 0;
+  }
+
+  /* Block Modal */
+  .gi-modal {
+    position: relative;
+    display: inline-block;
+    width: auto;
+    max-width: 500px;
+    min-width: 400px;
+    padding: 25px;
+    vertical-align: middle;
+    text-align: left;
+    font-family: sans-serif;
+    background: #fff;
+    border-radius: 3px;
+    box-shadow: 0 2px 10px rgba(0,0,0,.25);
+    color: #333;
+    z-index: 1;
+  }
+  @media (max-width: 480px) {
+    .gi-modal {
+      max-width: 300px;
+    }
+  }
+
+  /* Modal Content */
+
+    .gi-modal > h3 {
+      margin: 0;
+    }
+
+    .gi-modal h3 + p {
+      margin: 5px 0 20px;
+      font-size: 14px;
+      color: #555;
+    }
+
+    .gi-modal .close-modal {
+      display: block;
+      float: right;
+      text-decoration: underline;
+      font-size: 11px;
+      color: #999;
+      cursor: pointer;
+    }
+
+      .gi-modal .close-modal:hover {
+        color: #666;
+      }
+
+      .gi-modal #close-modal-x {
+        position: absolute;
+        top: 6px;
+        right: 12px;
+        font-size: 17px;
+        text-decoration: none;
+      }
+
+    .gi-modal-form input[type="text"] {
+      float: left;
+      padding: 10px;
+      height: auto;
+      width: 69%;
+      line-height: 1;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 15px;
+      font-family: sans-serif;
+    }
+
+      .gi-modal-form input[type="text"]:focus {
+        border-color: #aaa;
+        box-shadow: inset 0 2px 3px #eee;
+        outline: 0;
+      }
+
+    .gi-modal-form button {
+      position: relative;
+      width: 30%;
+      margin-left: 1%;
+      padding: 10px 0 7px;
+      border: 1px solid #ccc;
+      border-bottom: 3px solid #ccc;
+      background-color: #eee;
+      color: #555;
+      font-size: 13px;
+      font-family: sans-serif;
+      font-weight: bold;
+      text-transform: uppercase;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+      .gi-modal-form button:hover {
+        background-color: #f7f7f7;
+      }
+
+      .gi-modal-form button:active {
+        border-bottom: 1px solid #ccc;
+        top: 1px;
+        margin-bottom: 4px;
+      }
+
+      .gi-modal-form button:active,
+      .gi-modal-form button:focus {
+        outline: 0;
+      }
+
+/*
+   Collapse Toggle
+   ========================================================================== */
+
+  .gi-userlist-wrapper > .gi-collapse {
+    position: absolute;
+    display: block;
+    right: 0;
+    width: 30px;
+    height: 25px;
+    bottom: -24px;
+    background: url('../images/transparent.png');
+    background: rgba(0,0,0,.7);
+    border-radius: 0 0 0 3px;
+    cursor: pointer;
+  }
+
+    .gi-userlist-wrapper > .gi-collapse:hover {
+      background: rgba(0,0,0,.8);
+    }
+
+      /* Icon switching */
+      .gi-userlist-wrapper > .gi-collapse .gi-icon {
+        background-position: -84px -5px;
+        margin: 3px 8px;
+      }
+
+      .gi-userlist-wrapper > .gi-collapse .gi-icon {
+        background-position: -84px -5px;
+      }
+
+      .gi-userlist-wrapper.gi-collapsed  > .gi-collapse .gi-icon {
+        background-position: -58px -5px;
+      }
+
+/*
+   Helpers
+   ========================================================================== */
+
+.clearfix:before,
+.clearfix:after {
+  content: " ";
+  display: table;
+}
+
+.clearfix:after {
+  clear: both;
+}
+
+.clearfix {
+  *zoom: 1;
+}

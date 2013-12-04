@@ -1,0 +1,27 @@
+{
+  "name": "collaboration-bundle",
+  "main": "dist/collaboration-bundle.js",
+  "version": "0.1.0",
+  "homepage": "https://github.com/goinstant/collaboration-bundle",
+  "authors": [
+    "GoInstant",
+    "a salesforce.com company"
+  ],
+
+  "description": "A bundle of GoInstant widgets allowing easy-to-use, drop-in, collaboration in any web site.",
+  "keywords": [
+    "GoInstant",
+    "widget",
+    "collaboration-bundle"
+  ],
+
+  "license": "BSD",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
+
