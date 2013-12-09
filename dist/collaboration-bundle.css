@@ -1,0 +1,1346 @@
+/* ==========================================================================
+   GoInstant Userlist Widget Styles
+   ========================================================================== */
+
+.gi-userlist .gi-icon {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  background-image: url("goinstant-user-list/./images/sprite.png");
+  background-repeat: no-repeat;
+}
+
+@media print, (-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi) {
+  .gi-userlist .gi-icon {
+    background-image: url("goinstant-user-list/./images/sprite@2x.png");
+    background-size: 208px 52px;
+  }
+}
+
+/* 
+   Userlist Element
+   ========================================================================== */
+
+/* Change the box model and font smoothing */
+.gi-userlist * {
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  line-height: normal; /* Reset line height for bootstrap */
+}
+
+.gi-userlist {
+  position: relative;
+  display: none;
+  max-width: 170px;
+  font-family: sans-serif;
+  font-size: 14px;
+  z-index: 9999;
+  border-radius: 3px;
+  box-shadow: 0 1px 5px rgba(0,0,0,.2);
+}
+
+/*
+   Positioning
+   ========================================================================== */
+
+  /* Anchored */
+  .gi-anchor {
+    position: fixed;
+    top: 25%;
+  }
+
+    /* Right Aligned */
+    .gi-userlist.gi-right {
+      right: 0;
+      border-radius: 3px 0 0 3px;
+    }
+      .gi-userlist.gi-right .gi-inner {
+        border-radius: 3px 0 0 3px;
+        border-right: 0;
+      }
+
+    /* Left Aligned */
+    .gi-userlist.gi-left {
+      left: 0;
+      border-radius: 0 3px 3px 0;
+    }
+      .gi-userlist.gi-left .gi-inner {
+        border-radius: 0 3px 3px 0;
+        border-left: 0;
+      }
+
+    /* Custom Container */
+    .gi-relative {
+      position: relative;
+    }
+
+/*
+   User List
+   ========================================================================== */
+
+/* Wrapper */
+.gi-userlist .gi-inner {
+  display: block;
+  margin: 0;
+  padding: 0;
+  background: #f5f5f5;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+  /* Username List */
+  .gi-userlist ul {
+    margin: 0;
+    list-style: none;
+  }
+
+    .gi-userlist li {
+      height: auto;
+      margin: 0;
+      padding: 5px 7px;
+      overflow: hidden;
+      width: 100%;
+    }
+
+    .gi-userlist li.gi-local-user + li {
+      border-top: 1px solid #ddd;
+    }
+
+      /* Clearfix for li */
+      .gi-userlist li:before,
+      .gi-userlist li:after {
+          content: " ";
+          display: table;
+      }
+
+      .gi-userlist li:after {
+          clear: both;
+      }
+
+      /* Local user styling */
+      .gi-userlist li.gi-local-user {
+        padding: 6px 7px;
+        font-weight: 600;
+        background: #fff;
+      }
+
+  /* Avatar */
+  .gi-userlist .gi-avatar {
+    overflow: hidden;
+    width: 25px;
+    height: 21px;
+    border-radius: 2px;
+  }
+
+  .gi-userlist .gi-color {
+    position: relative;
+    display: block;
+    float: left;
+    width: 25px;
+    height: 25px;
+    background-image: url("goinstant-user-list/./images/sprite.png");
+    background-repeat: no-repeat;
+    background-position: -1px 0;
+    border-radius: 2px;
+  }
+
+    @media print, (-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi) {
+      .gi-userlist .gi-color {
+        background-image: url("goinstant-user-list/./images/sprite@2x.png");
+        background-size: 208px 52px;
+      }
+    }
+
+    /* Transparent Avatar Border */
+    .gi-userlist .gi-color:before {
+      display:block;
+      content:'';
+      position:absolute;
+      width:100%;
+      height:100%;
+      box-shadow: inset 0 0 0 1px rgba(0,0,0,.2);
+      border-radius: 2px;
+    }
+
+  .gi-userlist .gi-avatar .gi-avatar-img {
+    background: #f5f5f5;
+    width: 25px;
+    height: 25px;
+    vertical-align: top; /* Overrides breaking style in bootstrap */
+  }
+
+  /* Usernames */
+  .gi-userlist .gi-name {
+    display: block;
+    float: left;
+    overflow: hidden;
+    width: 102px;
+    padding: 6px 0 1px 7px;
+    font-size: 13px;
+    margin-right: 20px;
+  }
+
+  .gi-collapsed .gi-inner .gi-user {
+    overflow: visible;
+  }
+
+  .gi-userlist .gi-name.gi-no-options {
+    margin-right: 0;
+  }
+
+  .gi-userlist .gi-name span {
+    white-space: nowrap;
+  }
+
+  /* Change Username form */
+  .gi-userlist .gi-options {
+    position: absolute;
+    width: 100%;
+    height: auto;
+    border-radius: 3px;
+  }
+
+  .gi-userlist .gi-options input {
+    display: none;
+    float: right;
+    width: 103px;
+    padding: 5px 0 1px 9px;
+    margin-top: 8px;
+    height: auto;
+    font: inherit;
+    font-size: 13px;
+    box-shadow: none;
+    border: 0;
+  }
+
+    .gi-userlist .gi-options input:focus {
+      outline: 0;
+    }
+
+    .gi-userlist.gi-relative .gi-options input {
+      width: 107px;
+    }
+
+    .gi-userlist.gi-editing .gi-options input {
+      display: block;
+    }
+
+    .gi-userlist.gi-collapsed .gi-inner .gi-name,
+    .gi-userlist.gi-collapsed .gi-options {
+      display: none;
+      overflow: visible;
+    }
+
+
+    /* Change username icons */
+    .gi-userlist .gi-options .gi-icon {
+      display: block;
+      float: right;
+      margin: 11px 12px 0 0;
+      background-position: -135px -4px;
+      cursor: pointer;
+      opacity: .9;
+    }
+
+      .gi-userlist .gi-options .gi-icon:hover {
+        opacity: 1;
+      }
+
+
+    .gi-userlist.gi-editing .gi-options .gi-icon {
+      margin: 12px 12px 0 0;
+      background-position: -161px -5px;
+    }
+
+/*
+   Collapse Toggle
+   ========================================================================== */
+
+  .gi-userlist .gi-collapse {
+    position: absolute;
+    display: block;
+    width: 30px;
+    height: 25px;
+    bottom: -24px;
+    z-index: -1;
+    background: url("goinstant-user-list/./images/transparent.png");
+    background: rgba(0,0,0,.7);
+    cursor: pointer;
+    /* Prevent selection of elements from click */
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+  }
+
+    .gi-userlist .gi-collapse:hover {
+      background: rgba(0,0,0,.8);
+    }
+
+    /* Hide collapse toggle when using custom container */
+    .gi-userlist.gi-relative .gi-collapse {
+      display: none;
+    }
+
+      .gi-userlist .gi-collapse .gi-icon {
+        margin: 3px 8px;
+      }
+
+      /* Positioning */
+      .gi-userlist.gi-right .gi-collapse {
+        right: 0;
+        border-radius: 0 0 0 3px;
+      }
+
+      .gi-userlist.gi-left .gi-collapse {
+        left: 0;
+        border-radius: 0 0 3px 0;
+      }
+
+      /* Icon switching */
+      .gi-userlist.gi-right .gi-collapse .gi-icon,
+      .gi-userlist.gi-left.gi-collapsed .gi-collapse .gi-icon {
+        background-position: -84px -5px;
+      }
+
+      .gi-userlist.gi-left .gi-collapse .gi-icon,
+      .gi-userlist.gi-right.gi-collapsed .gi-collapse .gi-icon {
+        background-position: -58px -5px;
+      }
+
+/*
+   Helpers
+   ========================================================================== */
+
+.clearfix:before,
+.clearfix:after {
+  content: " ";
+  display: table;
+}
+
+.clearfix:after {
+  clear: both;
+}
+
+.clearfix {
+  *zoom: 1;
+}
+
+
+
+/* ==========================================================================
+   GoInstant Scroll Indicator Widget Styles
+   ========================================================================== */
+
+/* Scroll Container */
+.gi-scroll-up,
+.gi-scroll-down-right,
+.gi-scroll-left {
+  position: fixed;
+  width: 285px;
+  z-index: 9990;
+  padding: 10px 10px 5px;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+}
+
+/* Change box model */
+[class^="gi-scroll"] {
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+}
+
+/* 
+   Positioning
+   ========================================================================== */
+
+  /* Scrolling Up */
+  .gi-scroll-up {
+    top: 0;
+    right: 0;
+  }
+
+  /* Scrolling Down, Right */
+  .gi-scroll-down-right {
+    bottom: 0;
+    right: 0;
+  }
+
+  /* Scrolling Left */
+  .gi-scroll-left {
+    bottom: 0;
+    left: 0;
+  }
+
+
+/* 
+   Indicator Body
+   ========================================================================== */
+
+.gi-scroll {
+  position: relative;
+  height: 40px;
+  margin-bottom: 5px;
+  font-size: 13px;
+  font-family: sans-serif;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 3px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.18);
+    /* Gradient */
+  background-image: -moz-linear-gradient(top,  rgba(255,255,255,0.15) 0%, rgba(255,255,255,0) 100%);
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,0.15)), color-stop(100%,rgba(255,255,255,0)));
+  background-image: -webkit-linear-gradient(top,  rgba(255,255,255,0.15) 0%,rgba(255,255,255,0) 100%);
+  background-image: -o-linear-gradient(top,  rgba(255,255,255,0.15) 0%,rgba(255,255,255,0) 100%);
+  background-image: -ms-linear-gradient(top,  rgba(255,255,255,0.15) 0%,rgba(255,255,255,0) 100%);
+  background-image: linear-gradient(to bottom,  rgba(255,255,255,0.15) 0%,rgba(255,255,255,0) 100%);
+}
+
+.gi-scroll-msg {
+  margin-left: 37px;
+  padding: 14px 14px 14px 5px;
+  line-height: 1;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  text-align: left;
+  color: white;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
+}
+
+
+/* 
+   Scrolling Icon
+   ========================================================================== */
+
+.gi-scroll-icon {
+  display: block;
+  position: absolute;
+  height: 22px;
+  width: 22px;
+  left: 9px;
+  top: 9px;
+  background-image: url("goinstant-scroll-indicator/./images/icons.png");
+  background-repeat: no-repeat;
+}
+@media print, (-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi) {
+  .gi-scroll-icon {
+    background-image: url("goinstant-scroll-indicator/./images/icons@2x.png");
+    background-size: 85px 22px;
+  }
+}
+
+  .gi-scroll-left .gi-scroll-icon {
+    background-position: -42px 0;
+  }
+
+  .gi-scroll-right .gi-scroll-icon {
+    background-position: -63px 0;
+  }
+
+  .gi-scroll-down .gi-scroll-icon {
+    background-position: -21px 0;
+  }
+
+
+.gi-click-container {
+  pointer-events: none;
+  position: absolute;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  font-family: sans-serif;
+  font-size: 12px;
+}
+
+  /* Overrides breaking style in bootstrap */
+  .gi-click-container * {
+    box-sizing: content-box;
+    -moz-box-sizing: content-box; 
+  }
+
+.gi-click {
+  position: absolute;
+}
+
+.gi-click .gi-cursor {
+  background-image: url("goinstant-click-indicator/./images/cursor.png");
+  background-position: 0px 0px;
+  display: block;
+  position: absolute;
+  width: 15px;
+  height: 20px;
+  z-index: 1;
+ }
+
+.gi-click .gi-animation {
+  background-image: url("goinstant-click-indicator/./images/animation.png");
+  background-position: 0px 0px;
+  display: block;
+  position: absolute;
+  width: 56px;
+  height: 54px;
+  top: -26px;
+  left: -25px;
+
+}
+
+.gi-click .gi-name {
+  display: block;
+  white-space: nowrap;
+  padding: 3px;
+  position: absolute;
+  min-width: 40px;
+  height: 18px;
+  overflow: hidden;
+  top: 20px;
+  left: 15px;
+  font-size: 12px;
+  text-align: center;
+  color: white;
+}
+
+
+/* ==========================================================================
+   GoInstant Form Widget Styles
+   ========================================================================== */
+
+.gi-form {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 998;
+  font-family: sans-serif;
+}
+
+  .gi-form .gi-indicator {
+    position: absolute;
+  }
+
+  /* Username Tab */
+  .gi-form .gi-user {
+    display: block;
+    position: relative;
+    float: right;
+    min-width: 65px;
+    padding: 0 7px;
+    margin-bottom: 1px;
+    line-height: 2;
+    z-index: 1000;
+    overflow: hidden;
+    text-align: center;
+    font-size: 12px;
+    color: #fff;
+    border-radius: 3px 3px 0 0;
+  }
+
+  /* Input Border */
+  .gi-form .gi-bar {
+    position: absolute;
+    width: 100%;
+    height: 3px;
+    bottom: 1px;
+    z-index: 999;
+    border-radius: 1px 0 0 0;
+  }
+
+
+
+/* ==========================================================================
+   GoInstant Userlist Widget Styles
+   ========================================================================== */
+
+/* Change the box model */
+.gi-chat * {
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+}
+
+/* Wrapper */
+.gi-chat {
+  position: relative;
+  display: block;
+  width: 270px;
+  z-index: 9999;
+  background: #f5f5f5;
+  box-shadow: 0 1px 5px rgba(0,0,0,.2);
+  font-family: sans-serif;
+  font-size: 14px;
+}
+
+  .gi-chat-wrapper {
+    border-radius: 3px;
+    overflow: hidden;
+    border: 1px solid #CCC;
+  }
+
+  .gi-chat.gi-right .gi-chat-wrapper,
+  .gi-chat.gi-left .gi-chat-wrapper {
+    border-top: 0;
+    border-radius: 0;
+  }
+
+
+/* Wrapper Blink */
+.gi-chat .gi-collapse-wrapper.gi-widget-blink,
+.gi-chat .gi-collapse-wrapper.gi-widget-blink .gi-collapse {
+  background-color: #999999;
+}
+
+/*
+   Positioning
+   ========================================================================== */
+
+/* Anchored */
+.gi-chat.gi-anchor {
+  position: fixed;
+  top: auto;
+  bottom: 0;
+}
+
+/* Right Aligned */
+.gi-chat.gi-right {
+  right: 64px;
+}
+
+/* Left Aligned */
+.gi-chat.gi-left {
+  left: 64px;
+}
+
+/* Custom Container*/
+.gi-relative {
+  position: relative;
+}
+
+/*
+   Message List
+   ========================================================================== */
+
+.gi-chat .gi-message-list {
+  display: block;
+  margin: 0;
+  padding: 0;
+  background: #f5f5f5;
+  height: 250px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+  /* Message */
+  .gi-chat .gi-message-list li {
+    position: relative;
+    margin: 0;
+    padding: 6px 6px 0;
+    overflow: hidden;
+    border-bottom: 1px solid #E6E6E6;
+    list-style: none;
+  }
+
+    .gi-chat li:last-child {
+      border-bottom: 0px;
+    }
+
+    .gi-chat li:last-child {
+      border-bottom: 1px solid #E6E6E6;
+      margin-bottom: 6px;
+    }
+
+    /* Local user styling */
+    .gi-chat .gi-message-list li.gi-local-message {
+      margin-top: 0;
+      background: #FFF;
+    }
+
+    .gi-chat .gi-message-list li.gi-local-message .gi-time {
+      color: #999999;
+    }
+
+    /* Avatar */
+    .gi-chat .gi-avatar {
+      overflow: hidden;
+      width: 25px;
+      height: 21px;
+      border-radius: 2px;
+    }
+
+    .gi-chat .gi-avatar .gi-avatar-img {
+      background: #f5f5f5;
+      width: 25px;
+      height: 25px;
+      vertical-align: inherit; /* Overrides breaking style in bootstrap */
+    }
+
+    .gi-chat .gi-color {
+      position: relative;
+      display: inline-block;
+      width: 25px;
+      height: 25px;
+      background-image: url("goinstant-chat/./images/sprite.png");
+      background-repeat: no-repeat;
+      background-position: -1px 0;
+      border-radius: 2px;
+    }
+
+    @media print, (-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi) {
+      .gi-chat .gi-color {
+        background-image: url("goinstant-chat/./images/sprite@2x.png");
+        background-size: 140px 52px;
+      }
+    }
+
+      /* Transparent Avatar Border */
+      .gi-chat .gi-color:before {
+        display: block;
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        border-radius: 2px;
+        box-shadow: inset 0 0 0 1px rgba(0,0,0,.2);
+      }
+
+    /* Username */
+    .gi-chat .gi-name {
+      display: inline-block;
+      width: 180px;
+      margin-right: 20px;
+      padding: 0 10px 0 7px;
+      overflow: hidden;
+      line-height: 2;
+      font-size: 12px;
+      font-weight: 600;
+      color: #444;
+    }
+
+    /* Time */
+    .gi-chat .gi-time {
+      float: right;
+      padding: 0px 6px 6px 0px;
+      font-size: 10px;
+    }
+
+    /* Text */
+    .gi-chat .gi-text,
+    .gi-chat .gi-images {
+      display: block;
+      width: auto;
+      margin: -3px 20px 0 0;
+      padding: 0 0 10px 37px;
+      line-height: 1.25;
+      font-size: 12px;
+      word-wrap: break-word;
+    }
+
+    .gi-chat .gi-images .gi-image {
+      max-height: 100%;
+      max-width: 100%;
+      height: auto;
+      width: auto;
+      margin-top: 10px;
+    }
+
+
+/*
+  Message Form
+  ========================================================================== */
+
+.gi-chat .gi-message-form {
+  padding: 6px;
+  background: #e7e7e7;
+  border-top: 1px solid #ccc;
+  border-radius: 3px 0 0 0;
+  box-shadow: 0 0 -2px rgba(0,0,0,.2);
+}
+
+  .gi-chat .gi-message-form input {
+    display: block;
+    float: left;
+    width: 214px;
+    height: 30px;
+    margin: 0 5px 0 0;
+    padding: 7px;
+    font-size: 12px;
+    font-family: sans-serif;
+    border: 1px solid #ccc;
+    border-radius: 2px;
+  }
+
+    .gi-chat .gi-message-form input:focus {
+      border-color: #aaa;
+      outline: none;
+      box-shadow: inset 0 2px 3px rgba(0,0,0,.1);
+    }
+
+  .gi-chat .gi-message-form button {
+    display: block;
+    float: left;
+    width: 36px;
+    height: 28px;
+    padding: 3px 0 0;
+    margin: 1px 0 0;
+    background: #B4B6B8;
+    border: 0;
+    border-radius: 2px;
+    font-family: sans-serif;
+    text-transform: uppercase;
+    font-weight: normal;
+    color: #666;
+    cursor: pointer;
+    -webkit-appearance: none;
+  }
+
+    .gi-chat .gi-message-form .gi-icon {
+      background-position: -135px -6px;
+    }
+
+    .gi-chat .gi-message-form button:hover {
+      background: #BFC3C7;
+    }
+
+    .gi-chat .gi-message-form button:active,
+    .gi-chat .gi-message-form button:focus {
+      background: #B4B6B8;
+      outline: none;
+    }
+
+/*
+   Collapse Toggle
+   ========================================================================== */
+
+.gi-chat .gi-collapse-wrapper {
+  display: block;
+  position: absolute;
+  top: -7px;
+  width: 225px;
+  height: 7px;
+  border-radius: 3px 0 0 0;
+  background: url("goinstant-chat/./images/transparent.png");
+  background: rgba(0,0,0,.7);
+}
+
+  .gi-chat .gi-collapse {
+    display: block;
+    position: absolute;
+    width: 45px;
+    height: 30px;
+    top: -23px;
+    right: -45px;
+    padding: 7px 0 0 9px;
+    background: url("goinstant-chat/./images/transparent.png");
+    background: rgba(0,0,0,.7);
+    border-radius: 3px 3px 0 0;
+    cursor: pointer;
+  }
+
+    .gi-chat .gi-collapse .gi-icon {
+      background-position: -68px -7px;
+      width: 29px;
+    }
+
+      .gi-chat .gi-collapse.collapsed .gi-icon {
+        background-position: -31px -7px;
+      }
+
+  /* Turn off when using custom container */
+  .gi-chat.gi-relative .gi-collapse-wrapper {
+    display: none;
+  }
+
+  .gi-chat-wrapper.collapsed {
+    display: none;
+  }
+
+/*
+   Helpers
+   ========================================================================== */
+
+.gi-chat .gi-icon {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  background-image: url("goinstant-chat/./images/sprite.png");
+  background-repeat: no-repeat;
+}
+
+@media print, (-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi) {
+  .gi-userlist .gi-icon {
+    background-image: url("goinstant-chat/./images/sprite@2x.png");
+    background-size: 140px 52px;
+  }
+}
+
+.clearfix:before,
+.clearfix:after {
+  content: " ";
+  display: table;
+}
+
+.clearfix:after {
+  clear: both;
+}
+
+.clearfix {
+  *zoom: 1;
+}
+
+
+/* ==========================================================================
+   Collaboration Bundle Component Styles
+   ========================================================================== */
+
+  .gi-start-collaboration-bundle {
+    position: fixed;
+    width: 174px;
+    height: 54px;
+    right: -65px;
+    top: 25%;
+    padding: 14px 17px 20px;
+    font-family: sans-serif;
+    font-size: 17px;
+    font-weight: 600;
+    background-color: #4abe0f;
+    color: white;
+    text-shadow: 0 1px 1px #42AF0A;
+    border-radius: 5px 5px 0 0;
+    box-shadow: -1px 0px 3px rgba(0,0,0,.25);
+    cursor: pointer;
+    -webkit-font-smoothing: antialiased;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+
+    /* IE8/9 Button Image */
+    width: 54px\9;
+    height: 170px\9;
+    right: -5px\9;
+    border-radius: 0\9;
+    box-shadow: none\9;
+    text-indent: -9999px\9;
+    background-color: transparent\9;
+    background-image: url("collaboration-bundle/./css/../images/button-fallback.png");
+
+    /* Gradient */
+    background-image: -moz-linear-gradient(top,  rgba(255,255,255,0.25) 0%, rgba(255,255,255,0) 100%);
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,0.25)), color-stop(100%,rgba(255,255,255,0)));
+    background-image: -webkit-linear-gradient(top,  rgba(255,255,255,0.25) 0%,rgba(255,255,255,0) 100%);
+    background-image: -o-linear-gradient(top,  rgba(255,255,255,0.25) 0%,rgba(255,255,255,0) 100%);
+    background-image: linear-gradient(to bottom,  rgba(255,255,255,0.25) 0%,rgba(255,255,255,0) 100%);
+
+    /* Transition */
+    -webkit-transition: all .15s ease-in-out;
+       -moz-transition: all .15s ease-in-out;
+        -ms-transition: all .15s ease-in-out;
+         -o-transition: all .15s ease-in-out;
+            transition: all .15s ease-in-out;
+
+    /* Rotate */
+    -webkit-transform: rotate(-90deg);
+       -moz-transform: rotate(-90deg);
+         -o-transform: rotate(-90deg);
+  }
+
+    .gi-start-collaboration-bundle:hover {
+      right: -2px\9;
+      background-color: #54D314;
+      background-color: transparent\9;
+      text-shadow: 0 1px 1px rgba(66, 175, 10, 0);
+    }
+
+    .gi-start-collaboration-bundle:active {
+      background-color: #4abe0f;
+      background-color: transparent\9;
+    }
+
+/*
+   Userlist Wrapper
+   ========================================================================== */
+
+.gi-userlist-wrapper {
+  position: fixed;
+  right: 0;
+  top: 25%;
+  max-width: 175px;
+  box-shadow: 0 1px 5px rgba(0,0,0,.2);
+  font-family: sans-serif;
+  z-index: 9999;
+  border-radius: 3px;
+}
+
+  .gi-userlist-wrapper .gi-icon {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    background-image: url("collaboration-bundle/./css/../images/sprite.png");
+    background-repeat: no-repeat;
+  }
+
+  /* Collapsed State */
+  .gi-userlist-wrapper.gi-collapsed .gi-userlist.gi-override .gi-options,
+  .gi-userlist-wrapper.gi-collapsed .gi-userlist.gi-override .gi-name {
+    display: none;
+  }
+
+/*
+   Userlist Overrides
+   ========================================================================== */
+
+.gi-userlist.gi-override {
+  box-shadow: none;
+  border-radius: 0;
+}
+
+  .gi-userlist.gi-override .gi-inner {
+    border-right: 0;
+    border-bottom: 0;
+    border-radius: 3px 0 0 0;
+  }
+
+    .gi-userlist.gi-override .gi-inner li:only-child {
+      border-bottom: 1px solid #ccc;
+    }
+
+  .gi-userlist.gi-override .gi-options input {
+    width: 103px;
+  }
+
+/*
+   Utilities Panel
+   ========================================================================== */
+
+.gi-utilities {
+  position: relative;
+  height: auto;
+  padding: 3px 7px 0;
+  border-radius: 0 0 0 3px;
+  border: 1px solid #ccc;
+  border-top: 0;
+  border-right: 0;
+  background: #f7f7f7;
+  z-index: 1;
+}
+
+  .gi-utilities * {
+    line-height: normal;
+  }
+
+  .gi-utilities > div {
+    position: relative;
+    padding: 7px 0;
+    border-top: 1px solid #ddd;
+    background: #f7f7f7;
+
+  }
+
+    .gi-utilities > div a {
+      display: block;
+      position: relative;
+      padding: 5px 4px 4px 5px;
+      font-weight: bold;
+      font-size: 12px;
+      text-decoration: none;
+      border: 1px solid #f7f7f7;
+      border-radius: 3px;
+      color: #444;
+    }
+
+      .gi-utilities > div a .gi-icon {
+        display: block;
+        float: left;
+        margin: -2px 5px 0 0;
+      }
+
+        .gi-utilities > div a:hover {
+          color: #111;
+          border: 1px solid #ddd;
+          background-color: #eee;
+        }
+
+        .gi-utilities > div a:active {
+          background-color: #ddd;
+        }
+
+  /* Utilties Icons */
+  .gi-invite .gi-icon {
+    background-position: -32px -6px;
+  }
+
+  .gi-leave .gi-icon {
+    background-position: -109px -5px;
+  }
+
+  .gi-userlist-wrapper.gi-collapsed .gi-utilities-text {
+    display: none;
+  }
+
+  .gi-userlist-wrapper.gi-collapsed .gi-icon {
+    margin-right: 0;
+    float: none;
+  }
+
+  /* Utilities Popouts */
+  .gi-popout {
+    display: none;
+    position: absolute;
+    width: 200px;
+    left: -235px;
+    padding: 10px;
+    border-radius: 3px;
+    border: 1px solid #333;
+    background: url("collaboration-bundle/./css/../images/transparent.png");
+    background: rgba(0,0,0,.7);
+    box-shadow: 0 1px 5px rgba(0,0,0,.3);
+    font-size: 12px;
+    color: #eee;
+  }
+
+  .gi-userlist-wrapper.gi-inviting .gi-popout {
+    display: block;
+  }
+
+    /* Pseudo Arrow */
+    .gi-popout:before {
+      content: "";
+      right: -9px;
+      position: absolute;
+      border-top: 8px solid transparent;
+      border-bottom: 8px solid transparent;
+      border-left: 8px solid #333;
+    }
+
+  .gi-invite-popout {
+    bottom: 0;
+  }
+
+    .gi-invite-popout:before {
+      top: 28px;
+    }
+
+    .gi-popout input[type="text"] {
+      height: auto;
+      width: 100%;
+      margin: 0;
+      padding: 5px 6px;
+      border: 0;
+      border-radius: 3px;
+      font-family: sans-serif;
+      font-size: 13px;
+      background: #eee;
+      color: #999;
+      box-sizing: border-box;
+      -moz-box-sizing: border-box;
+    }
+
+      .gi-popout input[type="text"]:focus {
+        outline: 0;
+        background: #fff;
+        color: #222;
+      }
+
+    .gi-popout p {
+      font-weight: 400;
+      margin: 0 0 7px;
+    }
+
+/*
+   Modals
+   ========================================================================== */
+
+ /* Changing the Box Model */
+ .gi-modal-container * {
+   box-sizing: border-box;
+   -moz-box-sizing: border-box;
+ }
+
+/* Positioning Container */
+.gi-modal-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  z-index: 9999;
+}
+
+  .gi-modal-container:before {
+    content: "";
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+    margin-right: -0.25em;
+  }
+
+  /* Transparent Overlay */
+  .gi-modal-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url("collaboration-bundle/./css/../images/transparent.png");
+    background: rgba(0,0,0,.7);
+    z-index: 0;
+  }
+
+  /* Block Modal */
+  .gi-modal {
+    position: relative;
+    display: inline-block;
+    width: auto;
+    max-width: 500px;
+    min-width: 400px;
+    padding: 25px;
+    vertical-align: middle;
+    text-align: left;
+    font-family: sans-serif;
+    background: #fff;
+    border-radius: 3px;
+    box-shadow: 0 2px 10px rgba(0,0,0,.25);
+    color: #333;
+    z-index: 1;
+  }
+  @media (max-width: 480px) {
+    .gi-modal {
+      max-width: 300px;
+    }
+  }
+
+  /* Modal Content */
+
+    .gi-modal > h3 {
+      margin: 0;
+    }
+
+    .gi-modal h3 + p {
+      margin: 5px 0 20px;
+      font-size: 14px;
+      color: #555;
+    }
+
+    .gi-modal .close-modal {
+      display: block;
+      float: right;
+      text-decoration: underline;
+      font-size: 11px;
+      color: #999;
+      cursor: pointer;
+    }
+
+      .gi-modal .close-modal:hover {
+        color: #666;
+      }
+
+      .gi-modal #close-modal-x {
+        position: absolute;
+        top: 6px;
+        right: 12px;
+        font-size: 17px;
+        text-decoration: none;
+      }
+
+    .gi-modal-form input[type="text"] {
+      float: left;
+      padding: 10px;
+      height: auto;
+      width: 69%;
+      line-height: 1;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 15px;
+      font-family: sans-serif;
+    }
+
+      .gi-modal-form input[type="text"]:focus {
+        border-color: #aaa;
+        box-shadow: inset 0 2px 3px #eee;
+        outline: 0;
+      }
+
+    .gi-modal-form button {
+      position: relative;
+      width: 30%;
+      margin-left: 1%;
+      padding: 10px 0 7px;
+      border: 1px solid #ccc;
+      border-bottom: 3px solid #ccc;
+      background-color: #eee;
+      color: #555;
+      font-size: 13px;
+      font-family: sans-serif;
+      font-weight: bold;
+      text-transform: uppercase;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+      .gi-modal-form button:hover {
+        background-color: #f7f7f7;
+      }
+
+      .gi-modal-form button:active {
+        border-bottom: 1px solid #ccc;
+        top: 1px;
+        margin-bottom: 4px;
+      }
+
+      .gi-modal-form button:active,
+      .gi-modal-form button:focus {
+        outline: 0;
+      }
+
+/*
+   Collapse Toggle
+   ========================================================================== */
+
+  .gi-userlist-wrapper > .gi-collapse {
+    position: absolute;
+    display: block;
+    right: 0;
+    width: 30px;
+    height: 25px;
+    bottom: -24px;
+    background: url("collaboration-bundle/./css/../images/transparent.png");
+    background: rgba(0,0,0,.7);
+    border-radius: 0 0 0 3px;
+    cursor: pointer;
+  }
+
+    .gi-userlist-wrapper > .gi-collapse:hover {
+      background: rgba(0,0,0,.8);
+    }
+
+      /* Icon switching */
+      .gi-userlist-wrapper > .gi-collapse .gi-icon {
+        background-position: -84px -5px;
+        margin: 3px 8px;
+      }
+
+      .gi-userlist-wrapper > .gi-collapse .gi-icon {
+        background-position: -84px -5px;
+      }
+
+      .gi-userlist-wrapper.gi-collapsed  > .gi-collapse .gi-icon {
+        background-position: -58px -5px;
+      }
+
+/*
+   Helpers
+   ========================================================================== */
+
+.clearfix:before,
+.clearfix:after {
+  content: " ";
+  display: table;
+}
+
+.clearfix:after {
+  clear: both;
+}
+
+.clearfix {
+  *zoom: 1;
+}
