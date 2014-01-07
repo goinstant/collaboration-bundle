@@ -49,7 +49,7 @@ var collaborationBundle = new goinstant.widgets.CollaborationBundle({
 collaborationBundle.initialize();
 ```
 
-![](static/images/screenshots/collab-now-button.png)
+![](static/images/collab-now-button.png)
 
 When the bundle is first initialized, a "Collaborate Now!" button appears on the
 page. Clicking the button will start a collaboration session, at which point an

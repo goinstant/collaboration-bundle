@@ -1,14 +1,14 @@
 [![Build Status](https://travis-ci.org/goinstant/collaboration-bundle.png?branch=master)](https://travis-ci.org/goinstant/collaboration-bundle)
 
-## [Collaboration Bundle](https://developers.goinstant.com/beta/widgets/collaboration_bundle.html)
+## [Collaboration Bundle](https://developers.goinstant.com/v1/widgets/collaboration_bundle.html)
 
-The Collaboration Bundle collects the [GoInstant widgets](https://developers.goinstant.com/beta/widgets/index.html) together,
+The Collaboration Bundle collects the [GoInstant widgets](https://developers.goinstant.com/v1/widgets/index.html) together,
 providing an easy-to-use, drop-in collaboration layer in any web site.
 
 You can learn more in our
-[guides](https://developers.goinstant.com/beta/widgets/guides/index.html),
+[guides](https://developers.goinstant.com/v1/widgets/guides/index.html),
 and
-[documentation](https://developers.goinstant.com/beta/widgets/collaboration_bundle.html).
+[documentation](https://developers.goinstant.com/v1/widgets/collaboration_bundle.html).
 
 Have questions? We're on IRC. #goinstant on [Freenode](http://freenode.net/).
 
@@ -18,7 +18,7 @@ ways.
 
 #### Using our CDN
 
-We host a copy on our CDN. Have a look at the [docs](https://developers.goinstant.com/beta/widgets/collaboration_bundle.html)
+We host a copy on our CDN. Have a look at the [docs](https://developers.goinstant.com/v1/widgets/collaboration_bundle.html)
 to see how to reference those files, as well as how to initialize the component.
 
 #### How do I build the script myself?
