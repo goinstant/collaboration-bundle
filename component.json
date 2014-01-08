@@ -17,10 +17,10 @@
     "gjohnson/uuid": "ca90d4daf2a02a667e33e8a1938ad251cfcc8979",
     "goinstant/user-list":"v1.1.0",
     "goinstant/user-colors":"v1.0.1",
-    "goinstant/scroll-indicator":"v1.2.0",
-    "goinstant/click-indicator":"v1.1.1",
-    "goinstant/form":"v1.1.0",
-    "goinstant/chat":"v1.0.0"
+    "goinstant/scroll-indicator":"v1.2.1",
+    "goinstant/click-indicator":"v1.2.2",
+    "goinstant/form":"v1.1.1",
+    "goinstant/chat":"v1.0.2"
   },
 
   "development": {
