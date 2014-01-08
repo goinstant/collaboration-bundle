@@ -1,9 +1,6 @@
 # Collaboration Bundle
 
-The Collaboration Bundle collects the [GoInstant widgets](./index.md) together,
-providing an easy-to-use, drop-in collaboration layer atop any website.
-
-[![Screenshot of Collaboration Bundle](static/images/screenshots/collaboration.png)](https://collab-bundle-demo.herokuapp.com)
+[Intro to Collaboration Bundle](html/collab_intro.html "include")
 
 ## Features
 - Easy-to-use invitation URLs allow users to share their experience.
