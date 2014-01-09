@@ -8405,7 +8405,6 @@ var bind = window.addEventListener ? 'addEventListener' : 'attachEvent',
 
 exports.bind = function(el, type, fn, capture){
   el[bind](prefix + type, fn, capture || false);
-
   return fn;
 };
 
@@ -8422,7 +8421,6 @@ exports.bind = function(el, type, fn, capture){
 
 exports.unbind = function(el, type, fn, capture){
   el[unbind](prefix + type, fn, capture || false);
-
   return fn;
 };
 });
@@ -9092,7 +9090,9 @@ exports.on = function(el, event, selector, fn, capture){
 };
 
 /**
- * Unbind `event` listener `fn` for `el`.
+ * Unbind to `event` for `el` and invoke `fn(e)`.
+ * When a `selector` is given then delegated event
+ * handlers are unbound.
  *
  * @param {Element} el
  * @param {String} event
@@ -9470,7 +9470,7 @@ colors.REGEX = /^#([0-9A-F]{6}|[0-9A-F]{3})$/i;
  * The default color to use when no color is assigned to the user.
  * @const
  */
-colors.DEFAULT = '#8b8f96';
+colors.DEFAULT = '#aaa';
 
 /**
  * The default set of goinstant colors.
@@ -9478,10 +9478,10 @@ colors.DEFAULT = '#8b8f96';
  */
 colors.DEFAULTS = [
   '#3bb200',
-  '#e73e3d',
+  '#fc2a29',
   '#06b8de',
   '#e6c615',
-  '#8b72e9',
+  '#7151e8',
   '#8fe62e',
   '#f60889',
   '#51e8c3',
@@ -9492,7 +9492,7 @@ colors.DEFAULTS = [
   '#b6004d',
   '#d4b37e',
   '#4f7603',
-  '#5f368b',
+  '#8759b6',
   '#2a82cd',
   '#de9c8d',
   '#003f85',
@@ -12157,7 +12157,6 @@ require.register("goinstant-click-indicator/index.js", function(exports, require
  */
 
 var Emitter = require('emitter');
-var async = require('async');
 var _ = require('lodash');
 
 var UserCache = require('usercache');
@@ -12227,12 +12226,8 @@ function ClickIndicator(opts) {
  *                      initialization is complete.
  */
 ClickIndicator.prototype.initialize = function(cb) {
-  var tasks = [
-    _.bind(this._userCache.initialize, this._userCache),
-    _.bind(this._indicatorHandler.initialize, this._indicatorHandler)
-  ];
-
-  async.series(tasks, cb);
+  this._indicatorHandler.initialize();
+  this._userCache.initialize(cb);
 };
 
 /**
@@ -12286,12 +12281,9 @@ ClickIndicator.prototype.destroy = function(cb) {
 
   self._view.destroy();
 
-  var tasks = [
-    _.bind(self._indicatorHandler.destroy, self._indicatorHandler),
-    _.bind(self._userCache.destroy, self._userCache)
-  ];
+  this._indicatorHandler.destroy();
 
-  async.series(tasks, cb);
+  this._userCache.destroy(cb);
 };
 
 /**
@@ -12379,18 +12371,11 @@ function IndicatorHandler(component) {
  * @public
  * @param {function} cb A callback function.
  */
-IndicatorHandler.prototype.initialize = function(cb) {
+IndicatorHandler.prototype.initialize = function() {
   this._channel = this._room.channel(this._namespace);
 
   this._clickHandler.on('click', this._eventHandler);
-
-  var self = this;
-  this._channel.on('message', this._messageHandler, function(err) {
-    if (err) {
-      self._emitter.emit('error', err);
-    }
-    cb(err);
-  });
+  this._channel.on('message', this._messageHandler);
 };
 
 /**
@@ -12416,7 +12401,7 @@ IndicatorHandler.prototype._eventHandler = function(data) {
   var self = this;
   this._channel.message(message, function(err) {
     if (err) {
-      self._emitter.emit('error', err);
+      self._emitOrThrow(err);
     }
   });
 };
@@ -12437,6 +12422,12 @@ IndicatorHandler.prototype._messageHandler = function(data, context) {
 
   // If the element doesn't exist don't try to show an indicator
   if (!element) {
+    var msg =
+      'ClickIndicator: Element not found. A remote user clicked on an element' +
+      ' that could not be found locally. See https://developers.goinstant.com' +
+      '/v1/widgets/click_indicator.html#element-matching for more details.';
+
+    this._emitOrThrow(new Error(msg));
     return;
   }
 
@@ -12482,9 +12473,23 @@ IndicatorHandler.prototype._messageHandler = function(data, context) {
  * @public
  * @param {function} cb A callback function.
  */
-IndicatorHandler.prototype.destroy = function(cb) {
+IndicatorHandler.prototype.destroy = function() {
   this._clickHandler.off('click', this._eventHandler);
-  this._channel.off('message', this._messageHandler, cb);
+  this._channel.off('message', this._messageHandler);
+};
+
+/**
+ * Emits the error if a listener is registered, otherwise throw the error
+ * @private
+ * @param {object} err An error object.
+ */
+IndicatorHandler.prototype._emitOrThrow = function(err) {
+  if (this._emitter.hasListeners('error')) {
+    this._emitter.emit('error', err);
+
+  } else {
+    throw err;
+  }
 };
 
 module.exports = IndicatorHandler;
@@ -12824,7 +12829,6 @@ ClickHandler.prototype._mouseupHandler = function(event) {
  */
 ClickHandler.prototype._validatedClick = function(event) {
   var element = event.target || event.srcElement;
-
   var location = {};
 
   // If the start position was never set we know this was a click event using
@@ -12885,8 +12889,10 @@ ClickHandler.prototype._getPosition = function(event) {
     return pos;
 
   } else { // IE 8
-    pos.x = event.clientX;
-    pos.y = event.clientY;
+    var scrollPos = scrollPosition.get();
+
+    pos.x = event.clientX + scrollPos.left;
+    pos.y = event.clientY + scrollPos.top;
     return pos;
   }
 };
@@ -13216,7 +13222,6 @@ module.exports = new ScrollPosition();
 
 });
 require.register("component-type/index.js", function(exports, require, module){
-
 /**
  * toString ref.
  */
@@ -13233,20 +13238,17 @@ var toString = Object.prototype.toString;
 
 module.exports = function(val){
   switch (toString.call(val)) {
-    case '[object Function]': return 'function';
     case '[object Date]': return 'date';
     case '[object RegExp]': return 'regexp';
     case '[object Arguments]': return 'arguments';
     case '[object Array]': return 'array';
-    case '[object String]': return 'string';
   }
 
   if (val === null) return 'null';
   if (val === undefined) return 'undefined';
   if (val && val.nodeType === 1) return 'element';
-  if (val === Object(val)) return 'object';
 
-  return typeof val;
+  return typeof val.valueOf();
 };
 
 });
@@ -17467,6 +17469,8 @@ View.prototype.append = function() {
 
     classes(this._wrapper).add(ANCHOR_CLASS);
   }
+
+  this._scrollChatToBottom();
 };
 
 /**
@@ -17638,7 +17642,7 @@ View.prototype._renderText = function(textEl, text) {
     }
 
     // Make URL absolute
-    if (node.substring(0, 4) !== 'http') {
+    if (node.substring(0, 4).toLowerCase() !== 'http') {
       node = 'http://' + node;
     }
 
@@ -17688,6 +17692,8 @@ View.prototype._validateImage = function(imageEl, url, cb) {
     return cb(null);
   }
 
+  var validated = false;
+
   var img = new Image();
   classes(img).add(IMAGE_CLASS);
 
@@ -17695,38 +17701,36 @@ View.prototype._validateImage = function(imageEl, url, cb) {
   // Fixes an issue in IE9 where onload wouldn't trigger
   imageEl.appendChild(img);
 
-  // Timeout attempt to load image
-  var timeoutId = window.setTimeout(function() {
-    window.clearTimeout(timeoutId);
-    if (img.parentNode) {
-      img.parentNode.removeChild(img);
+  // Timeout after 10 seconds attempting to load image
+  var timeoutId = window.setTimeout(clearImg, 10000);
+
+  img.onerror = clearImg;
+
+  img.onabort = clearImg;
+
+  function clearImg() {
+    if (validated) {
+      return;
     }
 
-    return cb(null);
-  }, 5000);
+    validated = true;
 
-  img.onerror = function() {
     window.clearTimeout(timeoutId);
-
-    if (img.parentNode) {
-      img.parentNode.removeChild(img);
-    }
+    img.parentNode.removeChild(img);
 
     return cb(null);
-  };
-
-  img.onabort = function() {
-    window.clearTimeout(timeoutId);
-
-    if (img.parentNode) {
-      img.parentNode.removeChild(img);
-    }
-
-    return cb(null);
-  };
+  }
 
   img.onload = function() {
+    if (validated) {
+      // Timeout would have occurred, took too long to load image
+      return;
+    }
+
+    validated = true;
+
     window.clearTimeout(timeoutId);
+
     return cb(null);
   };
 
@@ -17735,13 +17739,7 @@ View.prototype._validateImage = function(imageEl, url, cb) {
     img.src = url;
 
   } catch (err) {
-    window.clearTimeout(timeoutId);
-
-    if (img.parentNode) {
-      img.parentNode.removeChild(img);
-    }
-
-    return(null);
+    clearImg();
   }
 };
 

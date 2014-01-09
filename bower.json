@@ -1,7 +1,7 @@
 {
   "name": "collaboration-bundle",
   "main": "dist/collaboration-bundle.js",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "homepage": "https://github.com/goinstant/collaboration-bundle",
   "authors": [
     "GoInstant",
