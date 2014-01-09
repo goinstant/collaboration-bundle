@@ -13242,10 +13242,12 @@ module.exports = function(val){
     case '[object RegExp]': return 'regexp';
     case '[object Arguments]': return 'arguments';
     case '[object Array]': return 'array';
+    case '[object Error]': return 'error';
   }
 
   if (val === null) return 'null';
   if (val === undefined) return 'undefined';
+  if (val !== val) return 'NaN';
   if (val && val.nodeType === 1) return 'element';
 
   return typeof val.valueOf();

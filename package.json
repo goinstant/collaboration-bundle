@@ -1,6 +1,6 @@
 {
   "name": "collaboration-bundle",
-  "version": "0.1.2",
+  "version": "1.0.0",
   "description": "collaboration-bundle",
   "main": "Gruntfile.js",
   "scripts": {

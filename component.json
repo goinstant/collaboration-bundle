@@ -2,7 +2,7 @@
   "name": "collaboration-bundle",
   "repo": "goinstant/collaboration-bundle",
   "description": "",
-  "version": "0.1.2",
+  "version": "1.0.0",
   "keywords": [],
   "dependencies": {
     "caolan/async":"*",
