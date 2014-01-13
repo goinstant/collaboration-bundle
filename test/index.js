@@ -264,7 +264,8 @@ describe('Bundle Index', function() {
 
       mockSessionCookie = {
         isSet: sinon.stub().returns(true),
-        get: sinon.stub().returns(sessionId)
+        get: sinon.stub().returns(sessionId),
+        destroy: sinon.stub()
       };
       sandbox.stub(Bundle.debug, 'SessionCookie').returns(mockSessionCookie);
 

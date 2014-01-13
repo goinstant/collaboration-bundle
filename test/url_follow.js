@@ -201,11 +201,13 @@ describe('URL Follow Component', function() {
         }, 'URLFollow: A callback function must be passed');
       });
 
-      it('throws when widget is already initialized', function() {
+      it('sends error to cb when widget is initialized', function(done) {
         follower._isInitialized = true;
-        assert.exception(function() {
-          follower.initialize(function() {});
-        }, 'URLFollow: Widget is already initialized');
+        follower.initialize(function(err) {
+          assert.ok(err);
+          assert.equal(err.message, 'URLFollow: Widget is already initialized');
+          done();
+        });
       });
 
       it('sends cross domain error to callback', function(done) {
@@ -214,7 +216,7 @@ describe('URL Follow Component', function() {
         follower._room.self().get = sandbox.stub().yields(null, fakeUser, {});
         follower._isCrossDomain = sandbox.stub().returns(true);
 
-        var ERROR_MESSAGE = 'URLFollow: Cross-Domain Initialization Denied';
+        var ERROR_MESSAGE = 'URLFollow: Cross-Domain Init Denied';
 
         follower.initialize(function(err) {
           assert.ok(err);
@@ -242,11 +244,13 @@ describe('URL Follow Component', function() {
 
     describe('errors', function() {
 
-      it('throws when widget is not initialized', function() {
+      it('throws when widget is not initialized', function(done) {
         follower._isInitialized = false;
-        assert.exception(function() {
-          follower.destroy(function(){});
-        }, 'URLFollow: Widget is not yet initialized');
+        follower.destroy(function(err) {
+          assert.ok(err);
+          assert.equal(err.message, 'URLFollow: Widget is not yet initialized');
+          done();
+        });
       });
     });
   });
@@ -297,7 +301,7 @@ describe('URL Follow Component', function() {
         follower.followData = {};
         follower.followUser = undefined;
         assert.exception(function() {
-          follower._validate();
+          follower._validate(function() {});
         }, 'URLFollow: Error occurred during widget initialization');
       });
 
@@ -305,7 +309,7 @@ describe('URL Follow Component', function() {
         follower.followData = {};
         follower.followUser = {};
         assert.exception(function() {
-          follower._validate();
+          follower._validate(function() {});
         }, 'URLFollow: Error occurred during widget initialization');
       });
     });
