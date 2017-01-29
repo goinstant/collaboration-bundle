@@ -79,8 +79,8 @@ directories in your Git repo root.
 
 ### Running Tests
 
-Tests are written in [mocha](http://visionmedia.github.io/mocha/). They're run
-in an [HTML file](http://visionmedia.github.io/mocha/#html-reporter).
+Tests are written in [mocha](http://mochajs.org/). They're run
+in an [HTML file](http://mochajs.org/#html).
 
 Just open the test/index.html file to run the tests.
 
